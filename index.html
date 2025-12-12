@@ -1,167 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Second Soul AI Chat</title>
-<style>
-  /* ---------------- Reset & Base ---------------- */
-  * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
-  body {background:#0a0a0a; color:#fff; display:flex; height:100vh; overflow:hidden;}
-  
-  /* ---------------- Sidebar ---------------- */
-  .sidebar {
-    width: 80px;
-    background:#0d0d0d;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:20px 0;
-    box-shadow:2px 0 10px #00d9ff33;
-  }
-  .sidebar button {
-    background:none;
-    border:none;
-    color:#00d9ff;
-    font-size:24px;
-    margin:20px 0;
-    cursor:pointer;
-    transition:0.3s;
-  }
-  .sidebar button:hover {
-    color:#b300ff;
-    transform: scale(1.2);
-  }
-
-  /* ---------------- Main Panel ---------------- */
-  .main {
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    background:#0a0a0a;
-  }
-  .chat-window {
-    flex:1;
-    padding:20px;
-    overflow-y:auto;
-  }
-  .chat-bubble {
-    display:inline-block;
-    background:#00d9ff33;
-    padding:12px 18px;
-    border-radius:20px;
-    margin:10px 0;
-    max-width:70%;
-    animation:fadeIn 0.3s;
-  }
-  .chat-bubble.ai {
-    background:#00d9ff;
-    color:#0a0a0a;
-    align-self:flex-start;
-  }
-  .chat-bubble.user {
-    background:#b300ff;
-    color:#fff;
-    align-self:flex-end;
-  }
-
-  /* ---------------- Input Area ---------------- */
-  .input-area {
-    display:flex;
-    padding:15px;
-    background:#0d0d0d;
-  }
-  .input-area input {
-    flex:1;
-    padding:12px;
-    border-radius:25px;
-    border:none;
-    outline:none;
-    background:#111;
-    color:#fff;
-    margin-right:10px;
-  }
-  .input-area button {
-    padding:12px 20px;
-    border:none;
-    border-radius:25px;
-    background:#00d9ff;
-    color:#0a0a0a;
-    cursor:pointer;
-    transition:0.3s;
-  }
-  .input-area button:hover {
-    background:#b300ff;
-    color:#fff;
-  }
-
-  /* ---------------- Animations ---------------- */
-  @keyframes fadeIn {
-    from {opacity:0; transform:translateY(10px);}
-    to {opacity:1; transform:translateY(0);}
-  }
-
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Second Soul AI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">Second Soul</div>
+      <nav>
+        <button class="nav-btn">🏠</button>
+        <button class="nav-btn">💬</button>
+        <button class="nav-btn">📡</button>
+        <button class="nav-btn">🤖</button>
+        <button class="nav-btn">⚙️</button>
+      </nav>
+    </aside>
 
-<!-- Sidebar -->
-<div class="sidebar">
-  <button title="Home">🏠</button>
-  <button title="Conversations">💬</button>
-  <button title="Channels">📡</button>
-  <button title="AI Brain">🤖</button>
-  <button title="Settings">⚙️</button>
-</div>
+    <main class="main">
+      <header class="topbar">
+        <h1>Second Soul AI — Universal Inbox</h1>
+      </header>
 
-<!-- Main Chat Panel -->
-<div class="main">
-  <div class="chat-window" id="chatWindow">
-    <div class="chat-bubble ai">Welcome to Second Soul AI. How can I help you today?</div>
+      <section class="content">
+        <div id="chatWindow" class="chat-window">
+          <div class="bubble ai">Welcome to Second Soul. Type your message below.</div>
+        </div>
+
+        <div class="composer">
+          <input id="userInput" type="text" placeholder="Type your message..." autocomplete="off" />
+          <button id="sendBtn">Send</button>
+        </div>
+      </section>
+    </main>
   </div>
-  <div class="input-area">
-    <input type="text" id="userInput" placeholder="Type your message...">
-    <button id="sendBtn">Send</button>
-  </div>
-</div>
 
-<script>
-  const sendBtn = document.getElementById('sendBtn');
-  const userInput = document.getElementById('userInput');
-  const chatWindow = document.getElementById('chatWindow');
-
-  sendBtn.addEventListener('click', () => {
-    const text = userInput.value.trim();
-    if(!text) return;
-
-    // Add user bubble
-    const userBubble = document.createElement('div');
-    userBubble.classList.add('chat-bubble', 'user');
-    userBubble.textContent = text;
-    chatWindow.appendChild(userBubble);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-
-    userInput.value = '';
-
-    // Fake AI response
-    const aiBubble = document.createElement('div');
-    aiBubble.classList.add('chat-bubble', 'ai');
-    aiBubble.textContent = "Second Soul is thinking...";
-    chatWindow.appendChild(aiBubble);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-
-    // Simulate AI reply delay
-    setTimeout(() => {
-      aiBubble.textContent = "This is where AI's futuristic reply will appear.";
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }, 1000);
-  });
-
-  // Press Enter key
-  userInput.addEventListener('keypress', (e) => {
-    if(e.key === 'Enter') sendBtn.click();
-  });
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
